@@ -13,6 +13,7 @@
     "forest": "0.16.1"
   },
   "devDependencies": {
+    "gh-pages": "^3.0.0",
     "parcel-bundler": "^1.6.1",
     "typescript": "^3.9.3"
   },
