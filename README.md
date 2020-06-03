@@ -9,4 +9,4 @@ Foliage: styling
 
 
 
-Play: https://shadwar.github.io/foliage-forest-snake/
+Play: https://foliage-forest-snake.now.sh/

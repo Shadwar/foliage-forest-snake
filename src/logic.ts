@@ -1,4 +1,4 @@
-import {createStore, createEvent, createEffect, sample, merge, forward, guard} from 'effector';
+import {createStore, createEvent, createEffect, sample, merge, forward, guard, combine} from 'effector';
 import {Status, SnakePart, CellType, Direction} from './types';
 import {moveSnake, populateCells, createFood, keycodeToDirection, tick} from './utils';
 
@@ -21,8 +21,12 @@ export const $status = createStore<Status>(Status.START)
 
 /** Направление движения змеи */
 const $direction = createStore<Direction>(Direction.NONE)
-  .on(keydown, keycodeToDirection)
   .reset(fxMove.fail);
+
+/** Направление было изменено  */
+const $directionChanged = createStore(false)
+  .on($direction, () => true)
+  .reset(fxMove.finally);
 
 /** Клетки, занятые змеей */
 const $snake = createStore<SnakePart[]>([[7, 7]])
@@ -39,6 +43,14 @@ export const $score = createStore(0)
 
 /** Игровое поле */
 export const $cells = createStore<CellType[]>([]);
+
+/** Выбрать направление движения, если за этот тик оно еще не произошло */
+sample({
+  source: $direction,
+  clock: guard(keydown, {filter: $directionChanged.map(changed => !changed)}),
+  target: $direction,
+  fn: keycodeToDirection,
+});
 
 /** При изменении значений змеи или еды - пересчитать игровое поле */
 sample({
