@@ -1,0 +1,23 @@
+{
+  "name": "foliage-forest-snake",
+  "version": "1.0.0",
+  "description": "Snake game on Effector + Forest + Foliage",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "effector": "20.15.8",
+    "foliage": "0.102.1",
+    "forest": "0.16.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.6.1",
+    "typescript": "^3.9.3"
+  },
+  "keywords": [
+    "typescript",
+    "javascript"
+  ]
+}
